@@ -1,5 +1,5 @@
 @echo off
 pause
-for /f "delims=" %i in ('php artisan --no-ansi key:generate --show') do 
-echo %i > app_key.txt
+for /f "delims=" %a in ('php artisan key:generate --show') do @set app_key=%a
+echo %app_key%>app_key.txt
 pause
