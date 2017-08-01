@@ -1,9 +1,7 @@
 @echo off
 pause
-echo #################################
-echo ## DO upload project to Heroku ##
-echo #################################
-set /p app_name=<app_name.txt
-git add .
-git commit -am "%app_name%"
-git push heroku master
+set /p app_key=<app_key.txt
+heroku config:set APP_KEY=%app_key%
+heroku config:set APP_LOG=errorlog
+heroku config:set APP_ENV=development APP_DEBUG=true APP_LOG_LEVEL=debug
+pause
