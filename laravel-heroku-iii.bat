@@ -1,4 +1,7 @@
 @echo off
+echo ##########################
+echo ## Config key to Heroku ##
+echo ##########################
 pause
 set /p app_key=<app_key.txt
 heroku config:set APP_KEY=%app_key%
