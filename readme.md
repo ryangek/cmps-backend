@@ -6,6 +6,7 @@ This project is designed to be easily deployed on heroku. It contains the follow
 - Procfile with a web process.
 - Database configuration Defaults to use Postgres using heroku-postgres `DATABASE_URL` environment variable.
 - Configured to [trust the Heroku Load balancers](https://devcenter.heroku.com/articles/getting-started-with-laravel#trusting-the-load-balancer). 
+- Getting [batch](https://drive.google.com/file/d/0B-ncD-RnMTRid3haQ0NxdHQwcWc/view) file.
 
 ## Local Development
 
