@@ -8,7 +8,7 @@
                 <div class="panel-heading">Dashboard</div>
 
                 <div class="panel-body">
-                    {{ print_r($user) }}
+                    {{ dd($user) }}
                 </div>
             </div>
         </div>
