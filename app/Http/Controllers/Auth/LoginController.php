@@ -5,6 +5,11 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
+use Illuminate\Http\Request;
+
+use App\User;
+use Auth;
+
 class LoginController extends Controller
 {
     /*
@@ -34,6 +39,25 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest', ['except' => 'logout']);
+        $this->middleware('guest')->except('logout');
+    }
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function login(Request $req){
+
+        if(!Auth::attempt(['email' => $req->email, 'password' => $req->password])){
+
+            return response()->json(['error' => 'Your credential is wrong'], 401);
+
+        }
+
+        $user = User::where('email',$req->email)->get();
+
+        return response()->json($user, 200);
+
     }
 }
