@@ -16,11 +16,13 @@ class CreateDeviceTable extends Migration
         Schema::create('device', function (Blueprint $table) {
             $table->increments('device_id');
             $table->string('device_name',50);
-            $table->integer('device_park')->unsigned();
-            $table->foreign('device_park')
-                  ->references('park_id')->on('park_space')
+            $table->enum('device_status', ['yes', 'no']);
+            $table->decimal('device_top', 5, 3);
+            $table->decimal('device_left', 5, 3);
+            $table->integer('locate_id')->unsigned();
+            $table->foreign('locate_id')
+                  ->references('locate_id')->on('location')
                   ->onDelete('cascade');
-            //$table->timestamps();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
 

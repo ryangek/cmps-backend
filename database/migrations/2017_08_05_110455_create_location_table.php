@@ -20,7 +20,6 @@ class CreateLocationTable extends Migration
             $table->integer('locate_quantity');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-
         });
     }
 

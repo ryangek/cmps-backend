@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -54,20 +54,19 @@ class LoginController extends Controller
             return response()->json(['error' => 'Your credential is wrong'], 401);
 
         }
-
-        $where = array(
+        $admin = User::where([
             ['email', '=', $req->email],
-            ['status', '=', 'member']
-        );
-        $user = User::where($where)->get();
+            ['status', '=', 'administrator']
+        ])->get(); // 'email',$req->email
 
-        if($user->all() === []){
+        if($admin->all() === []){
 
             return response()->json(['error' => 'Your credential is wrong'], 401);
 
         }
 
-        return response()->json($user, 200);
+        return response()->json($admin, 200);
+
     }
 
     /**

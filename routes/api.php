@@ -14,6 +14,8 @@ use Illuminate\Http\Request;
 */
 
 Route::post('auth/login', 'Auth\LoginController@login');
+Route::post('auth/admin/login', 'Admin\LoginController@login');
+
 
 
 /**
@@ -41,18 +43,6 @@ Route::group(['prefix' => 'locate', 'middleware' => 'auth:api'], function () {
 });
 
 /**
- * ParkSpace API
- */
-Route::group(['prefix' => 'park', 'middleware' => 'auth:api'], function () {
-    Route::get('all', 'ParkSpaceController@showParkSpaceAll');
-    Route::get('id/{id}', 'ParkSpaceController@showParkSpace');
-    Route::get('edit/{id}', 'ParkSpaceController@editParkSpace');
-    Route::patch('update/{id}', 'ParkSpaceController@updateParkSpace');
-    Route::post('add', 'ParkSpaceController@storeParkSpace');
-    Route::delete('delete/{id}', 'ParkSpaceController@destroyParkSpace');
-});
-
-/**
  * Device API
  */
 Route::group(['prefix' => 'device', 'middleware' => 'auth:api'], function () {
@@ -62,6 +52,10 @@ Route::group(['prefix' => 'device', 'middleware' => 'auth:api'], function () {
     Route::patch('update/{id}', 'DeviceController@updateDevice');
     Route::post('add', 'DeviceController@storeDevice');
     Route::delete('delete/{id}', 'DeviceController@destroyDevice');
+
+    Route::get('allDeviceId', 'DeviceController@getDevice');
+    Route::get('addedDeviceId', 'DeviceController@getAddedDevice');
+    Route::get('availiableDeviceId', 'DeviceController@getAvailiableDevice');
 });
 
 /**
