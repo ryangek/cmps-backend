@@ -165,4 +165,28 @@ class DeviceController extends Controller
         }
         return response()->json($Device, 200);
     }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function updateDeviceJson(Request $request)
+    {
+        $data = json_decode($request->getContent(), true);
+        foreach ($data as $d) {
+            Device::where('device_id', $d['device_id'])
+                ->update(['device_name' => $d['device_name'],
+                        'device_status'=> $d['device_status'],
+                        'device_top' => $d['device_top'],
+                        'device_left' => $d['device_left'],
+                        'updated_at' => date("Y-m-d H:i:s")]);
+        }
+        if(!$data){
+            return response()->json(['message' => 'Don\'t updated any device'], 404);
+        }
+        return response()->json($data, 200);
+    }
 }

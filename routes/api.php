@@ -50,6 +50,9 @@ Route::group(['prefix' => 'device', 'middleware' => 'auth:api'], function () {
     Route::get('id/{id}', 'DeviceController@showDevice');
     Route::get('edit/{id}', 'DeviceController@editDevice');
     Route::patch('update/{id}', 'DeviceController@updateDevice');
+
+    Route::post('updatejson', 'DeviceController@updateDeviceJson');
+
     Route::post('add', 'DeviceController@storeDevice');
     Route::delete('delete/{id}', 'DeviceController@destroyDevice');
 

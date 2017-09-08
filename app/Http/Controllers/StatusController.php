@@ -125,4 +125,5 @@ class StatusController extends Controller
         }
         return response()->json(['message' => 'Member '.$id.' has been deleted'], 200);
     }
+
 }
