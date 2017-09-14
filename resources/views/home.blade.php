@@ -7,7 +7,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Dashboard</div>
                 <div class="panel-body">
-                    You are logged in!
+                    มึงเข้าระบบแล้วไง งง ไร สัส
                 </div>
             </div>
         </div>
