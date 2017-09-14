@@ -26,8 +26,11 @@ class DeviceController extends Controller
     private function createDevice(array $data)
     {
         return Device::create([
-            'device_name' => $data['deviceName'],
-            'device_park' => $data['devicePark']
+            'device_id' => $data['device_id'],
+            'device_name' => $data['device_name'],
+            'device_status' => $data['device_status'],
+            'device_top' => $data['device_top'],
+            'device_left' => $data['device_left']
         ]);
     }
 
@@ -40,9 +43,11 @@ class DeviceController extends Controller
     public function storeDevice(Request $request)
     {
         if(!$this->createDevice($request->all())){
-            return response()->json(['error' => 'Cannot add Device'], 404);
+            // return response()->json(['error' => 'Cannot add Device'], 404);
+            return 0;
         }
-        return response()->json(['Device' => $request->all()], 200);
+        // return response()->json(['Device' => $request->all()], 200);
+        return 1;
     }
 
     /**
@@ -182,6 +187,7 @@ class DeviceController extends Controller
                         'device_status'=> $d['device_status'],
                         'device_top' => $d['device_top'],
                         'device_left' => $d['device_left'],
+                        'locate_id' => $d['locate_id'],
                         'updated_at' => date("Y-m-d H:i:s")]);
         }
         if(!$data){

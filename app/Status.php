@@ -13,4 +13,15 @@ class Status extends Model
      */
     protected $table = 'status';
 
+    /**
+    *
+    * Fillable
+    * @var array
+    */
+    protected $fillable = [
+        'stat_motor',
+        'stat_switch',
+        'stat_ultra',
+        'stat_device'
+    ];
 }

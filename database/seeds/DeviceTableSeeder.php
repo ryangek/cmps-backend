@@ -17,7 +17,7 @@ class DeviceTableSeeder extends Seeder
             'device_status' => 'no',
             'device_top' => 33.333,
             'device_left' => 33.333,
-            'locate_id' => 1100
+            'locate_id' => null
         ]);
         DB::table('device')->insert([
             'device_id' => '1102',
@@ -25,7 +25,7 @@ class DeviceTableSeeder extends Seeder
             'device_status' => 'no',
             'device_top' => 59.234,
             'device_left' => 50.226,
-            'locate_id' => 1100
+            'locate_id' => null
         ]);
         DB::table('device')->insert([
             'device_id' => '1103',

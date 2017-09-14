@@ -40,6 +40,8 @@ Route::group(['prefix' => 'locate', 'middleware' => 'auth:api'], function () {
     Route::patch('update/{id}', 'LocationController@updateLocation');
     Route::post('add', 'LocationController@storeLocation');
     Route::delete('delete/{id}', 'LocationController@destroyLocation');
+
+    Route::post('quantity', 'LocationController@quantityLocation');
 });
 
 /**

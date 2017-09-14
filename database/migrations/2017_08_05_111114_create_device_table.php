@@ -19,7 +19,7 @@ class CreateDeviceTable extends Migration
             $table->enum('device_status', ['yes', 'no']);
             $table->decimal('device_top', 5, 3);
             $table->decimal('device_left', 5, 3);
-            $table->integer('locate_id')->unsigned();
+            $table->integer('locate_id')->nullable()->unsigned();
             $table->foreign('locate_id')
                   ->references('locate_id')->on('location')
                   ->onDelete('cascade');

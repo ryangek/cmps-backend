@@ -12,4 +12,13 @@ class Device extends Model
      * @var array
      */
     protected $table = 'device';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'device_id', 'device_name', 'device_status', 'device_top', 'device_left', 'locate_id'
+    ];
 }

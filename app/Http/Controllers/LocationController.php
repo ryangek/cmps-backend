@@ -26,9 +26,9 @@ class LocationController extends Controller
     private function createLocation(array $data)
     {
         return Location::create([
-            'locate_name' => $data['locateName'],
-            'locate_floor' => $data['locateFloor'],
-            'locate_quantity' => $data['locateQuantity']
+            'locate_name' => $data['locate_name'],
+            'locate_floor' => $data['locate_floor'],
+            'locate_image' => $data['locate_image']
         ]);
     }
 
@@ -97,15 +97,16 @@ class LocationController extends Controller
      */
     public function updateLocation(Request $request, $id)
     {
+        $data = json_decode($request->getContent(), true);
         $Location = Location::where('locate_id', $id)->get();
         if(!$Location){
             return response()->json(['error' => 'No location to update'], 404);
         }
         Location::where('locate_id', $id)
             ->update([
-                'locate_name' => $request->input('locateName'),
-                'locate_floor' => $request->input('locateFloor'),
-                'locate_quantity' => $request->input('locateQuantity')
+                'locate_name' => $request->input('locate_name'),
+                'locate_floor' => $request->input('locate_floor'),
+                'locate_quantity' => $request->input('locate_quantity')
             ]);
         return response()->json(['Location' => Location::where('locate_id', $id)->get()], 200);
     }
@@ -123,5 +124,22 @@ class LocationController extends Controller
             return response()->json(['message' => 'Cannot deleted '.$id], 404);
         }
         return response()->json(['message' => 'Location '.$id.' has been deleted'], 200);
+    }
+
+    /**
+     * Edited the specified resource from storage.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function quantityLocation(Request $request)
+    {
+        $data = json_decode($request->getContent(), true);
+        Location::where('locate_id', $data['locate_id'])
+                ->update(['locate_quantity' => $data['locate_quantity'],
+                        'updated_at' => date("Y-m-d H:i:s")]);
+         if(!$data){
+            return response()->json(['message' => 'Didn\'t updated location'], 404);
+        }
+        return response()->json($data, 200);
     }
 }

@@ -13,4 +13,12 @@ class Location extends Model
      */
     protected $table = 'location';
 
+     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+    	'locate_name','locate_floor','locate_image'
+    ];
 }
