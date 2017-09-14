@@ -17,7 +17,7 @@ class CreateLocationTable extends Migration
             $table->increments('locate_id');
             $table->string('locate_name',50);
             $table->integer('locate_floor');
-            $table->mediumText('locate_image', 360000);
+            $table->mediumText('locate_image');
             $table->integer('locate_quantity')->nullable()->default(0);
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
