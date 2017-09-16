@@ -15,7 +15,7 @@ class CreateTableRfid extends Migration
     {
         Schema::create('rfid', function (Blueprint $table) {
             $table->increments('rfid');
-            $table->string('rfid_data');
+            $table->string('rfid_data', 12)->unique();
             $table->integer('rfid_user')->unsigned();
             $table->foreign('rfid_user')
                 ->references('id')->on('users')
