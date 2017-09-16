@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Location extends Model
 {
+    protected $primaryKey = 'locate_id';
     /**
      * Use table
      *
