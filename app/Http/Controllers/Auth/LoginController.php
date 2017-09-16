@@ -56,8 +56,7 @@ class LoginController extends Controller
         }
 
         $where = array(
-            ['email', '=', $req->email],
-            ['status', '=', 'member']
+            ['email', '=', $req->email]
         );
         $user = User::where($where)->get();
 
