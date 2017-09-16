@@ -31,7 +31,7 @@ class DeviceController extends Controller
             'device_status' => $data['device_status'],
             'device_top' => $data['device_top'],
             'device_left' => $data['device_left'],
-            'locate_id' => null
+            'locate_id' => $data['locate_id']
         ]);
     }
 
