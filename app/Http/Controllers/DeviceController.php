@@ -26,6 +26,7 @@ class DeviceController extends Controller
     private function createDevice(array $data)
     {
         return Device::create([
+            'device_id' => $data['device_id'],
             'device_name' => $data['device_name'],
             'device_status' => $data['device_status'],
             'device_ultra' => $data['device_ultra'],
@@ -42,21 +43,16 @@ class DeviceController extends Controller
      */
     public function storeDevice(Request $request)
     {
-//        $this->validate($request, array(
-//            'device_id' => 'unique:device'
-//        ));
-        $Device = Device::where('device_id', $request->input('device_id'))->get()->toArray();
-        /*if(!$Device){
+        $Data = json_decode($request->getContent(), true);
+        $Device = Device::where('device_id', $Data['device_id'])->get()->toArray();
+        if (count($Device)>0) {
+            return 0;
+        } else {
             if(!$this->createDevice($request->all())){
                 return 0;
             }
             return 1;
-        }*/
-        if ($Device === []) {
-            return $Device;
         }
-
-        return 1;
     }
 
     /**
@@ -67,8 +63,8 @@ class DeviceController extends Controller
      */
     public function showDevice($id) //show
     {
-        $Device = Device::where('device_id', $id)->get();
-        if(!$Device){
+        $Device = Device::where('device_id', $id)->get()->toArray();
+        if (count($Device)>0) {
             return response()->json(['error' => 'Device '.$id.' not found'], 404);
         }
         return response()->json(['Device' => $Device], 200);
@@ -110,14 +106,17 @@ class DeviceController extends Controller
      */
     public function updateDevice(Request $request, $id)
     {
-
-        $Device = Device::where('device_id', $id)->get();
-        if(!$Device){
-            return 0;
+        $Data = json_decode($request->getContent(), true);
+        $Device = Device::where('device_id', $Data['device_id'])->get()->toArray();
+        if(count($Device) > 0){
+            if(Device::where('device_id', $id)
+                ->update('device_ultra', $request->input('device_ultra'))) {
+                return 1;
+            } else {
+                return 0;
+            }
         }
-        Device::where('device_id', $id)
-            ->update('device_ultra', $request->input('device_ultra'));
-        return 1;
+        return 0;
     }
 
     /**
