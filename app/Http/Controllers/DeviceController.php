@@ -26,7 +26,6 @@ class DeviceController extends Controller
     private function createDevice(array $data)
     {
         return Device::create([
-            'device_id' => $data['device_id'],
             'device_name' => $data['device_name'],
             'device_status' => $data['device_status'],
             'device_top' => $data['device_top'],
