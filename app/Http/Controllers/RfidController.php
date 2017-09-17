@@ -51,11 +51,11 @@ class RfidController extends Controller
      */
     public function showRfidData(Request $request) //show
     {
-        $Rfid = Rfid::where('rfid_data', $request->input('rfid_data'))->get();
-        if(!$Rfid){
+        $Rfid = Rfid::where('rfid_data', $request->input('rfid_data'))->get()->toArray();
+        if($Rfid){
             return 0;
         }
-        return print_r($Rfid);
+        return $Rfid;
     }
 
     /**
