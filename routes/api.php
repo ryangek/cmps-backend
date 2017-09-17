@@ -50,6 +50,7 @@ Route::group(['prefix' => 'locate', 'middleware' => 'auth:api'], function () {
 Route::group(['prefix' => 'device', 'middleware' => 'auth:api'], function () {
     Route::get('all', 'DeviceController@showDeviceAll');
     Route::get('id/{id}', 'DeviceController@showDevice');
+    Route::get('name/{name}', 'DeviceController@showDeviceId');
     Route::get('edit/{id}', 'DeviceController@editDevice');
     Route::patch('update/{id}', 'DeviceController@updateDevice');
 
@@ -68,10 +69,29 @@ Route::group(['prefix' => 'device', 'middleware' => 'auth:api'], function () {
  */
 Route::group(['prefix' => 'status', 'middleware' => 'auth:api'], function () {
     Route::get('all', 'StatusController@showStatusAll');
+    Route::get('added', 'StatusController@showStatusAdded');
     Route::get('id/{id}', 'StatusController@showStatus');
     Route::get('edit/{id}', 'StatusController@editStatus');
     Route::patch('update/{id}', 'StatusController@updateStatus');
     Route::post('add', 'StatusController@storeStatus');
     Route::delete('delete/{id}', 'StatusController@destroyStatus');
+});
+
+/**
+ * Rfid API
+ */
+Route::group(['prefix' => 'rfid', 'middleware' => 'auth:api'], function () {
+    Route::get('all', 'RfidController@showRfidAll');
+    Route::get('id/{id}', 'RfidController@showRfid');
+    Route::patch('update/{id}', 'RfidController@updateRfid');
+
+    Route::post('updatejson', 'RfidController@updateRfidJson');
+
+    Route::post('add', 'RfidController@storeRfid');
+    Route::delete('delete/{id}', 'RfidController@destroyRfid');
+
+    Route::get('allDeviceId', 'RfidController@getRfid');
+    Route::get('addedDeviceId', 'RfidController@getAddedRfid');
+    Route::get('availiableDeviceId', 'RfidController@getAvailiableRfid');
 });
 

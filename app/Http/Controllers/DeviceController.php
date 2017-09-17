@@ -41,12 +41,14 @@ class DeviceController extends Controller
      */
     public function storeDevice(Request $request)
     {
-        if(!$this->createDevice($request->all())){
-            // return response()->json(['error' => 'Cannot add Device'], 404);
-            return 0;
+        $Device = Device::where('device_id', $request->input('device_id'))->get();
+        if(!$Device){
+            if(!$this->createDevice($request->all())){
+                return 0;
+            }
+            return 1;
         }
-        // return response()->json(['Device' => $request->all()], 200);
-        return 1;
+        return 0;
     }
 
     /**
@@ -193,5 +195,20 @@ class DeviceController extends Controller
             return response()->json(['message' => 'Don\'t updated any device'], 404);
         }
         return response()->json($data, 200);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function showDeviceId($name) //show
+    {
+        $Device = Device::where('device_name', $name)->get();
+        if(!$Device){
+            return 0;
+        }
+        return $Device;
     }
 }

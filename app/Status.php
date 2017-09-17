@@ -19,7 +19,6 @@ class Status extends Model
     * @var array
     */
     protected $fillable = [
-        'stat_motor',
         'stat_switch',
         'stat_ultra',
         'stat_device'

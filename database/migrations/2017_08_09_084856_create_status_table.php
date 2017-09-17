@@ -15,14 +15,12 @@ class CreateStatusTable extends Migration
     {
         Schema::create('status', function (Blueprint $table) {
             $table->increments('stat_id');
-            $table->enum('stat_motor',['on','off','idle']);            
             $table->enum('stat_switch',['open','close']);            
             $table->enum('stat_ultra',['yes','no']);
             $table->integer('stat_device')->unsigned();
             $table->foreign('stat_device')
                   ->references('device_id')->on('device')
                   ->onDelete('cascade');
-            //$table->timestamps();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
         });

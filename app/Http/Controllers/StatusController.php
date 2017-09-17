@@ -26,10 +26,9 @@ class StatusController extends Controller
     private function createStatus(array $data)
     {
         return Status::create([
-            'stat_motor' => $data['statMotor'],
-            'stat_switch' => $data['statSwitch'],
-            'stat_ultra' => $data['statUltra'],
-            'stat_device' => $data['statDevice']
+            'stat_switch' => $data['stat_switch'],
+            'stat_ultra' => $data['stat_ultra'],
+            'stat_device' => $data['stat_device']
         ]);
     }
 
@@ -103,10 +102,9 @@ class StatusController extends Controller
         if(!$Status){
             return response()->json(['error' => 'No member to update'], 404);
         }
-        $Status->stat_motor = $request->input('statMotor');
-        $Status->stat_switch = $request->input('statSwitch');
-        $Status->stat_ultra = $request->input('statUltra');
-        $Status->stat_device = $request->input('statDevice');
+        $Status->stat_switch = $request->input('stat_switch');
+        $Status->stat_ultra = $request->input('stat_ultra');
+        $Status->stat_device = $request->input('stat_device');
         $Status->save();
         return response()->json(['Status' => $Status], 200);
     }
@@ -125,5 +123,22 @@ class StatusController extends Controller
         }
         return response()->json(['message' => 'Member '.$id.' has been deleted'], 200);
     }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function showStatusAdded()
+    {
+        $Status = DB::table('status')
+            ->join('device', 'status.status_device', '=', 'device.device_id')
+            ->select('status.*', 'device.*')
+            ->where('device.device_status','yes')
+            ->get();
+        return response()->json(['StatusAll' => $Status], 200);
+    }
+
 
 }
