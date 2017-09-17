@@ -30,8 +30,7 @@ class DeviceController extends Controller
             'device_name' => $data['device_name'],
             'device_status' => $data['device_status'],
             'device_top' => $data['device_top'],
-            'device_left' => $data['device_left'],
-            'locate_id' => $data['locate_id']
+            'device_left' => $data['device_left']
         ]);
     }
 
