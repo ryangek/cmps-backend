@@ -13,19 +13,16 @@ class StatusTableSeeder extends Seeder
     {
         DB::table('status')->insert([
             'stat_switch' => 'close',
-            'stat_ultra' => 'no',
             'stat_device' => 1101
         ]);
 
         DB::table('status')->insert([
             'stat_switch' => 'close',
-            'stat_ultra' => 'no',
             'stat_device' => 1102
         ]);
 
         DB::table('status')->insert([
             'stat_switch' => 'close',
-            'stat_ultra' => 'no',
             'stat_device' => 1103
         ]);
     }
