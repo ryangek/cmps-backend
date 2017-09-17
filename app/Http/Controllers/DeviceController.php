@@ -110,7 +110,7 @@ class DeviceController extends Controller
         $Device = Device::where('device_id', $id)->get()->toArray();
         if(count($Device) > 0){
             if(Device::where('device_id', $id)
-                ->update('device_ultra', $request->input('device_ultra'))) {
+                ->update(['device_ultra' => $request->input('device_ultra'))]) {
                 return 1;
             } else {
                 return 0;
