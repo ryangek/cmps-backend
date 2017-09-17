@@ -107,7 +107,7 @@ class DeviceController extends Controller
     public function updateDevice(Request $request, $id)
     {
         $Data = json_decode($request->getContent(), true);
-        $Device = Device::where('device_id', $Data['device_id'])->get()->toArray();
+        $Device = Device::where('device_id', $id)->get()->toArray();
         if(count($Device) > 0){
             if(Device::where('device_id', $id)
                 ->update('device_ultra', $request->input('device_ultra'))) {
