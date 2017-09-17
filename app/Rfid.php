@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Rfid extends Model
 {
+    protected $primaryKey = 'rfid';
     protected $table = 'rfid';
     /**
      * The attributes that are mass assignable.
