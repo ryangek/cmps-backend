@@ -29,13 +29,13 @@ class RfidController extends Controller
     public function storeRfid(Request $request)
     {
         $Rfid = Rfid::where('rfid_data', $request->input('rfid_data'))->get();
-        if (!$Rfid) {
+        if ($Rfid !== []) {
             if(!$this->createRfid($request->all())){
                 return 0;
             }
             return 1;
         }
-        return $request->input('rfid_data');
+        return $Rfid;
     }
 
     /**
