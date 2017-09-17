@@ -35,7 +35,7 @@ class RfidController extends Controller
             }
             return 1;
         }
-        return 0;
+        return $request->input('rfid_data');
     }
 
     /**
