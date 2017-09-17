@@ -53,10 +53,10 @@ class DeviceController extends Controller
             return 1;
         }*/
         if ($Device === []) {
-            return 0;
+            return $Device;
         }
 
-        return $Device;
+        return 1;
     }
 
     /**
