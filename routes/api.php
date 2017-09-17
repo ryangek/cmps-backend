@@ -64,18 +64,6 @@ Route::group(['prefix' => 'device', 'middleware' => 'auth:api'], function () {
     Route::get('availiableDeviceId', 'DeviceController@getAvailiableDevice');
 });
 
-/**
- * Status API
- */
-Route::group(['prefix' => 'status', 'middleware' => 'auth:api'], function () {
-    Route::get('all', 'StatusController@showStatusAll');
-    Route::get('added', 'StatusController@showStatusAdded');
-    Route::get('id/{id}', 'StatusController@showStatus');
-    Route::get('edit/{id}', 'StatusController@editStatus');
-    Route::patch('update/{id}', 'StatusController@updateStatus');
-    Route::post('add', 'StatusController@storeStatus');
-    Route::delete('delete/{id}', 'StatusController@destroyStatus');
-});
 
 /**
  * Rfid API

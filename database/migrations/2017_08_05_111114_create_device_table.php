@@ -17,6 +17,7 @@ class CreateDeviceTable extends Migration
             $table->increments('device_id');
             $table->string('device_name',50);
             $table->enum('device_status', ['yes', 'no']);
+            $table->enum('device_ultra', ['yes', 'no']);
             $table->decimal('device_top', 5, 3);
             $table->decimal('device_left', 5, 3);
             $table->integer('locate_id')->nullable()->unsigned();

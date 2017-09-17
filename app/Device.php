@@ -21,6 +21,6 @@ class Device extends Model
      * @var array
      */
     protected $fillable = [
-        'device_id', 'device_name', 'device_status', 'device_top', 'device_left', 'locate_id'
+        'device_id', 'device_name', 'device_status', 'device_top', 'device_left', 'locate_id', 'device_ultra'
     ];
 }

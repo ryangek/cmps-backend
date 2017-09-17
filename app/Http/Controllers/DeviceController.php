@@ -28,6 +28,7 @@ class DeviceController extends Controller
         return Device::create([
             'device_name' => $data['device_name'],
             'device_status' => $data['device_status'],
+            'device_ultra' => $data['device_ultra'],
             'device_top' => $data['device_top'],
             'device_left' => $data['device_left']
         ]);
