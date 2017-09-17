@@ -26,7 +26,6 @@ class StatusController extends Controller
     private function createStatus(array $data)
     {
         return Status::create([
-            'stat_switch' => $data['stat_switch'],
             'stat_ultra' => $data['stat_ultra'],
             'stat_device' => $data['stat_device']
         ]);
@@ -102,7 +101,6 @@ class StatusController extends Controller
         if(!$Status){
             return response()->json(['error' => 'No member to update'], 404);
         }
-        $Status->stat_switch = $request->input('stat_switch');
         $Status->stat_ultra = $request->input('stat_ultra');
         $Status->stat_device = $request->input('stat_device');
         $Status->save();
@@ -133,7 +131,7 @@ class StatusController extends Controller
     public function showStatusAdded()
     {
         $Status = DB::table('status')
-            ->join('device', 'status.status_device', '=', 'device.device_id')
+            ->join('device', 'status.stat_device', '=', 'device.device_id')
             ->select('status.*', 'device.*')
             ->where('device.device_status','yes')
             ->get();

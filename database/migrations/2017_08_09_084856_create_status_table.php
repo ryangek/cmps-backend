@@ -15,7 +15,6 @@ class CreateStatusTable extends Migration
     {
         Schema::create('status', function (Blueprint $table) {
             $table->increments('stat_id');
-            $table->enum('stat_switch',['open','close']);            
             $table->enum('stat_ultra',['yes','no']);
             $table->integer('stat_device')->unsigned();
             $table->foreign('stat_device')
