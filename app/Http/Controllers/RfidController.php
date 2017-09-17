@@ -35,7 +35,7 @@ class RfidController extends Controller
             }
             return 1;
         }
-        return $Rfid;
+        return 0;
     }
 
     /**
