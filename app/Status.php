@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Status extends Model
 {
+    protected $primaryKey = 'stat_id';
     /**
      * Use table
      *
