@@ -45,7 +45,7 @@ class DeviceController extends Controller
 //        $this->validate($request, array(
 //            'device_id' => 'unique:device'
 //        ));
-        $Device = Device::where('device_id', $request->input('device_id'))->get();
+        $Device = Device::where('device_id', $request->input('device_id'))->get()->toArray();
         /*if(!$Device){
             if(!$this->createDevice($request->all())){
                 return 0;
@@ -56,7 +56,7 @@ class DeviceController extends Controller
             return 0;
         }
 
-        return 1;
+        return $Device;
     }
 
     /**
