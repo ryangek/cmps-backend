@@ -55,7 +55,7 @@ class RfidController extends Controller
         if(!$Rfid || $Rfid == []){
             return 0;
         }
-        return 1;
+        return $Rfid;
     }
 
     /**
