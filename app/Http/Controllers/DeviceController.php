@@ -42,19 +42,21 @@ class DeviceController extends Controller
      */
     public function storeDevice(Request $request)
     {
-        $this->validate($request, array(
-            'device_id' => 'unique:device'
-        ));
+//        $this->validate($request, array(
+//            'device_id' => 'unique:device'
+//        ));
         $Device = Device::where('device_id', $request->input('device_id'))->get();
-        if(!$Device){
-            return 0;
-        }
-        if(!$Device){
+        /*if(!$Device){
             if(!$this->createDevice($request->all())){
                 return 0;
             }
             return 1;
+        }*/
+        if ($Device === []) {
+            return 0;
         }
+
+        return 1;
     }
 
     /**
@@ -111,14 +113,11 @@ class DeviceController extends Controller
 
         $Device = Device::where('device_id', $id)->get();
         if(!$Device){
-            return response()->json(['error' => 'No member to update'], 404);
+            return 0;
         }
         Device::where('device_id', $id)
-            ->update([
-                'device_name' => $request->input('deviceName'),
-                'device_park' => $request->input('devicePark')
-            ]);
-        return response()->json(['Device' => $Device], 200);
+            ->update('device_ultra', $request->input('device_ultra'));
+        return 1;
     }
 
     /**
