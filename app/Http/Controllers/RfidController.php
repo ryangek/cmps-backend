@@ -34,8 +34,11 @@ class RfidController extends Controller
                 return 0;
             }
             return 1;
+        } else {
+            if(!Rfid){
+                return 0;
+            }
         }
-        return 0;
     }
 
     /**
