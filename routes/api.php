@@ -82,7 +82,7 @@ Route::group(['prefix' => 'status', 'middleware' => 'auth:api'], function () {
  */
 Route::group(['prefix' => 'rfid', 'middleware' => 'auth:api'], function () {
     Route::get('all', 'RfidController@showRfidAll');
-    Route::get('data/{data}', 'RfidController@showRfid');
+    Route::post('data', 'RfidController@showRfidData');
     Route::patch('update/{id}', 'RfidController@updateRfid');
 
     Route::post('updatejson', 'RfidController@updateRfidJson');

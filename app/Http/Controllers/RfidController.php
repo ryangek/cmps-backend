@@ -49,9 +49,9 @@ class RfidController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function showRfid($data) //show
+    public function showRfidData(Request $request) //show
     {
-        $Rfid = Rfid::where('rfid_data', $data)->get();
+        $Rfid = Rfid::where('rfid_data', $request->input('rfid_data'))->get();
         if(!$Rfid){
             return 0;
         }

@@ -41,14 +41,19 @@ class DeviceController extends Controller
      */
     public function storeDevice(Request $request)
     {
+        $this->validate($request, array(
+            'device_id' => 'unique:device'
+        ));
         $Device = Device::where('device_id', $request->input('device_id'))->get();
+        if(!$Device){
+            return 0;
+        }
         if(!$Device){
             if(!$this->createDevice($request->all())){
                 return 0;
             }
             return 1;
         }
-        return 0;
     }
 
     /**

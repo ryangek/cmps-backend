@@ -41,9 +41,9 @@ class StatusController extends Controller
     public function storeStatus(Request $request)
     {
         if(!$this->createStatus($request->all())){
-            return response()->json(['error' => 'Cannot add status'], 404);
+            return 0;
         }
-        return response()->json(['Status' => $request->all()], 200);
+        return 1;
     }
 
     /**
