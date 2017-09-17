@@ -28,6 +28,9 @@ class RfidController extends Controller
      */
     public function storeRfid(Request $request)
     {
+        $this->validate($request, array(
+            'rfid_data' => 'unique:rfid'
+        ));
         $Rfid = Rfid::where('rfid_data', $request->input('rfid_data'))->get();
         if(!$Rfid){
             return 0;
