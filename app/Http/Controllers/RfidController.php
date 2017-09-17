@@ -55,7 +55,7 @@ class RfidController extends Controller
         if(!$Rfid){
             return 0;
         }
-        return $Rfid;
+        return print_r($Rfid);
     }
 
     /**
