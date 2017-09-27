@@ -42,6 +42,9 @@ class UserController extends Controller
      */
     public function storeUser(Request $request)
     {
+        $data = User::where('email', $request->input('email'))->get()->toArray();
+        if(count($data)>0)
+            return response()->json(['error' => 'Email has already'], 404);
         if(!$this->createUser($request->all())){
            return response()->json(['error' => 'Cannot add member'], 404);
         }

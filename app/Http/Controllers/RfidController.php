@@ -106,4 +106,21 @@ class RfidController extends Controller
         }
         return response()->json(['message' => 'Rfid '.$id.' has been deleted'], 200);
     }
+
+    public function showRfidNoUser() {
+        $Rfid = Rfid::whereNull('rfid_user')->get();
+        return response()->json(['Rfid' => $Rfid], 200);
+    }
+    public function showRfidNoDevice() {
+        $Rfid = Rfid::whereNull('rfid_fixed')->get();
+        return response()->json(['Rfid' => $Rfid], 200);
+    }
+    public function showRfidAdUser() {
+        $Rfid = Rfid::whereNotNull('rfid_user')->get();
+        return response()->json(['Rfid' => $Rfid], 200);
+    }
+    public function showRfidAdDevice() {
+        $Rfid = Rfid::whereNotNull('rfid_fixed')->get();
+        return response()->json(['Rfid' => $Rfid], 200);
+    }
 }

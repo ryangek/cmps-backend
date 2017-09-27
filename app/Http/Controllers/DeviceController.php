@@ -156,9 +156,6 @@ class DeviceController extends Controller
     public function getAddedDevice()
     {
         $Device = Device::where('device_status', 'yes')->get()->toArray();
-        if(!$Device){
-            return response()->json(['message' => 'Don\'t have any device'], 404);
-        }
         return response()->json($Device, 200);
     }
 
@@ -170,9 +167,6 @@ class DeviceController extends Controller
     public function getAvailiableDevice()
     {
         $Device = Device::where('device_status', 'no')->get()->toArray();
-        if(!$Device){
-            return response()->json(['message' => 'Don\'t have any device'], 404);
-        }
         return response()->json($Device, 200);
     }
 

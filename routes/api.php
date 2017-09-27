@@ -69,6 +69,17 @@ Route::group(['prefix' => 'device', 'middleware' => 'auth:api'], function () {
  * Rfid API
  */
 Route::group(['prefix' => 'rfid', 'middleware' => 'auth:api'], function () {
+
+    Route::group(['prefix' => 'no'], function () {
+        Route::get('user', 'RfidController@showRfidNoUser');
+        Route::get('device', 'RfidController@showRfidNoDevice');
+    });
+
+    Route::group(['prefix' => 'ad'], function () {
+        Route::get('user', 'RfidController@showRfidAdUser');
+        Route::get('device', 'RfidController@showRfidAdDevice');
+    });
+
     Route::get('all', 'RfidController@showRfidAll');
     Route::post('data', 'RfidController@showRfidData');
     Route::patch('update/{id}', 'RfidController@updateRfid');

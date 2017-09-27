@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Storage;
 
 use App\Location;
 
@@ -40,10 +41,20 @@ class LocationController extends Controller
      */
     public function storeLocation(Request $request)
     {
-        if(!$this->createLocation($request->all())){
+        //$path = $request->file('locate_image')->store('avatars');
+        $file = file_get_contents($request->input('locate_image'));
+        //$save = file_put_contents('ryangek.png', base64_decode($file));
+        //$data = $request->input('locate_image');
+        //$data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $data));
+        //$save = file_put_contents('ryangek.png', $data);
+        //$save =file_put_contents('img.png', base64_decode($data));
+
+        $save = file_put_contents('image.jpg', $file);
+        return response()->json(['message' => $save], 200);
+        /*if(!$this->createLocation($request->all())){
             return response()->json(['error' => 'Cannot add Location'], 404);
         }
-        return response()->json(['Location' => $request->all()], 200);
+        return response()->json(['Location' => $request->all()], 200);*/
     }
 
     /**
