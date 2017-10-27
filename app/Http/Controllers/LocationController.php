@@ -129,6 +129,10 @@ class LocationController extends Controller
         $Locate = Location::where('locate_id', $id)->get();
         //Storage::disk('local')->delete('img/'.$Locate[0]->locate_name.'.jpg');
         unlink('img/'.$Locate[0]->locate_id.'.jpg');
+        Device::where('locate_id', $id)
+            ->update([
+                'device_status' => 'no'
+            ]);
         $Location = Location::where('locate_id', $id);
         if(!$Location->delete()){
             return response()->json(['message' => 'Cannot deleted '.$id], 404);
