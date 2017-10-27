@@ -61,6 +61,7 @@ Route::group(['prefix' => 'device', 'middleware' => 'auth:api'], function () {
 
     Route::get('allDeviceId', 'DeviceController@getDevice');
     Route::get('addedDeviceId', 'DeviceController@getAddedDevice');
+    Route::get('addedDeviceId/{where}', 'DeviceController@getAddedDeviceWhere');
     Route::get('availiableDeviceId', 'DeviceController@getAvailiableDevice');
 });
 

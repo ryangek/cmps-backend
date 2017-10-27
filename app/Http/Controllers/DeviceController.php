@@ -164,6 +164,20 @@ class DeviceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function getAddedDeviceWhere($where)
+    {
+        $Device = Device::where([
+            ['device_status', 'yes'],
+            ['locate_id', $where]
+        ])->get()->toArray();
+        return response()->json($Device, 200);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function getAvailiableDevice()
     {
         $Device = Device::where('device_status', 'no')->get()->toArray();

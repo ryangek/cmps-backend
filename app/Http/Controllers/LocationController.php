@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Storage;
 
 use App\Location;
+use App\Device;
 
 class LocationController extends Controller
 {
@@ -41,20 +42,15 @@ class LocationController extends Controller
      */
     public function storeLocation(Request $request)
     {
-        //$path = $request->file('locate_image')->store('avatars');
-        $file = file_get_contents($request->input('locate_image'));
-        //$save = file_put_contents('ryangek.png', base64_decode($file));
-        //$data = $request->input('locate_image');
-        //$data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $data));
-        //$save = file_put_contents('ryangek.png', $data);
-        //$save =file_put_contents('img.png', base64_decode($data));
-
-        $save = file_put_contents('image.jpg', $file);
-        return response()->json(['message' => $save], 200);
-        /*if(!$this->createLocation($request->all())){
-            return response()->json(['error' => 'Cannot add Location'], 404);
+        $this->createLocation($request->all());
+        $location = Location::where('locate_name', $request->input('locate_name'))->get();
+        foreach ($location as $item) { 
+            $id = $item['locate_id'];
         }
-        return response()->json(['Location' => $request->all()], 200);*/
+        $file = file_get_contents($request->input('locate_image'));
+        file_put_contents('img/'.$id.'.jpg', $file);
+        //Storage::disk('local')->put('img/'.$request->input('locate_name').'.jpg', $file);
+        return response()->json(['message' => 'ok'], 200);
     }
 
     /**
@@ -130,6 +126,9 @@ class LocationController extends Controller
      */
     public function destroyLocation($id)
     {
+        $Locate = Location::where('locate_id', $id)->get();
+        //Storage::disk('local')->delete('img/'.$Locate[0]->locate_name.'.jpg');
+        unlink('img/'.$Locate[0]->locate_id.'.jpg');
         $Location = Location::where('locate_id', $id);
         if(!$Location->delete()){
             return response()->json(['message' => 'Cannot deleted '.$id], 404);

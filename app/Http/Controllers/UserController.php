@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\User;
+use App\Rfid;
 
 class UserController extends Controller
 {
@@ -48,6 +49,14 @@ class UserController extends Controller
         if(!$this->createUser($request->all())){
            return response()->json(['error' => 'Cannot add member'], 404);
         }
+        $user = User::where('email', $request->input('email'))->get();
+        foreach ($user as $item) {
+            $uid = $item['id'];
+        }
+        Rfid::where('rfid', $request->input('rfid'))
+            ->update([
+                'rfid_user' => $uid
+            ]);
         return response()->json(['email' => $request->input('email')], 200);
     }
 
@@ -131,6 +140,10 @@ class UserController extends Controller
         if(!$user->delete()){
             return response()->json(['message' => 'Cannot deleted '.$id], 404);
         }
+        Rfid::where('rfid_user', $id)
+            ->update([
+                'rfid_user' => ''
+            ]);
         return response()->json(['message' => 'Member '.$id.' has been deleted'], 200);
     }
 }

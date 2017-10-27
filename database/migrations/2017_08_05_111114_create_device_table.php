@@ -23,7 +23,7 @@ class CreateDeviceTable extends Migration
             $table->integer('locate_id')->nullable()->unsigned();
             $table->foreign('locate_id')
                   ->references('locate_id')->on('location')
-                  ->onDelete('cascade');
+                  ->onDelete('set null');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
 

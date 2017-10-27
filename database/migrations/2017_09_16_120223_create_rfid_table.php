@@ -19,7 +19,7 @@ class CreateRfidTable extends Migration
             $table->integer('rfid_user')->unsigned()->nullable();
             $table->foreign('rfid_user')
                 ->references('id')->on('users')
-                ->onDelete('cascade');
+                ->onDelete('set null');
             $table->integer('rfid_fixed')->unsigned()->nullable();
             $table->foreign('rfid_fixed')
                 ->references('device_id')->on('device')
