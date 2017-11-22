@@ -24,8 +24,7 @@ class CreateDeviceTable extends Migration
             $table->foreign('locate_id')
                   ->references('locate_id')->on('location')
                   ->onDelete('set null');
-            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamps();
 
         });
     }

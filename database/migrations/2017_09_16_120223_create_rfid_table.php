@@ -24,8 +24,7 @@ class CreateRfidTable extends Migration
             $table->foreign('rfid_fixed')
                 ->references('device_id')->on('device')
                 ->onDelete('set null');
-            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamps();
         });
     }
 
