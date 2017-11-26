@@ -207,7 +207,7 @@ class DeviceController extends Controller
         $locate = Location::all();
         foreach ($locate as $l) {
             $num = count(Device::where('locate_id', $l->locate_id)->get());
-            Location::where('locate_id', $l->locate_id)->update('locate_quantity' => $num);
+            Location::where('locate_id', $l->locate_id)->update(['locate_quantity' => $num]);
         }
         if(!$data){
             return response()->json(['message' => 'Don\'t updated any device'], 404);
