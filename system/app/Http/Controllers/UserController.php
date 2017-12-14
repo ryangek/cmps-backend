@@ -28,10 +28,12 @@ class UserController extends Controller
     {
         return User::create([
             'name' => $data['name'],
+            'username' => $data['username'],
             'email' => $data['email'],
             'api_token' => str_random(60),
             'password' => bcrypt($data['password']),
             'status' => 'member',
+            'address' => $data['address'],
         ]);
     }
 
@@ -120,7 +122,9 @@ class UserController extends Controller
             return response()->json(['error' => 'No member to update'], 404);
         }
         $user->name = $request->input('name');
+        $user->username = $request->input('username');
         $user->email = $request->input('email');
+        $user->address = $request->input('address');
         $user->save();
         return response()->json(['user' => $user], 200);
     }
