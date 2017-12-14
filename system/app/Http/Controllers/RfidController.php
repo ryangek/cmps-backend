@@ -67,7 +67,7 @@ class RfidController extends Controller
     public function showRfidAll()
     {
         $Rfid = Rfid::all();
-        return response()->json(['RfidAll' => $Rfid], 200);
+        return response()->json(['Rfid' => $Rfid], 200);
     }
 
     /**
