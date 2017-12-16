@@ -48,6 +48,9 @@ class LocationController extends Controller
             $id = $item['locate_id'];
         }
         $file = file_get_contents($request->input('locate_image'));
+        
+        $oldmask = umask(0);  // helpful when used in linux server 
+
         file_put_contents('img/'.$id.'.jpg', $file);
         //Storage::disk('local')->put('img/'.$request->input('locate_name').'.jpg', $file);
         return response()->json(['message' => 'ok'], 200);

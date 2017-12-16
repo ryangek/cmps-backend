@@ -21,7 +21,7 @@ Route::post('auth/admin/login', 'Admin\LoginController@login');
 /**
  * User API
  */
-Route::group(['prefix' => 'user'/*, 'middleware' => 'auth:api'*/], function () {
+Route::group(['prefix' => 'user', 'middleware' => 'auth:api'], function () {
     Route::get('all', 'UserController@showUserAll');
     Route::get('id/{id}', 'UserController@showUser');
     Route::get('edit/{id}', 'UserController@editUser');
@@ -33,7 +33,7 @@ Route::group(['prefix' => 'user'/*, 'middleware' => 'auth:api'*/], function () {
 /**
  * Location API
  */
-Route::group(['prefix' => 'locate'/*, 'middleware' => 'auth:api'*/], function () {
+Route::group(['prefix' => 'locate', 'middleware' => 'auth:api'], function () {
     Route::get('all', 'LocationController@showLocationAll');
     Route::get('id/{id}', 'LocationController@showLocation');
     Route::get('edit/{id}', 'LocationController@editLocation');
@@ -47,7 +47,7 @@ Route::group(['prefix' => 'locate'/*, 'middleware' => 'auth:api'*/], function ()
 /**
  * Device API
  */
-Route::group(['prefix' => 'device'/*, 'middleware' => 'auth:api'*/], function () {
+Route::group(['prefix' => 'device', 'middleware' => 'auth:api'], function () {
     Route::get('all', 'DeviceController@showDeviceAll');
     Route::get('id/{id}', 'DeviceController@showDevice');
     Route::get('name/{name}', 'DeviceController@showDeviceId');
@@ -69,7 +69,7 @@ Route::group(['prefix' => 'device'/*, 'middleware' => 'auth:api'*/], function ()
 /**
  * Rfid API
  */
-Route::group(['prefix' => 'rfid'/*, 'middleware' => 'auth:api'*/], function () {
+Route::group(['prefix' => 'rfid', 'middleware' => 'auth:api'], function () {
 
     Route::group(['prefix' => 'no'], function () {
         Route::get('user', 'RfidController@showRfidNoUser');
@@ -98,9 +98,11 @@ Route::group(['prefix' => 'rfid'/*, 'middleware' => 'auth:api'*/], function () {
 /**
  * History API
  */
-Route::group(['prefix' => 'history'/*, 'middleware' => 'auth:api'*/], function() {
+Route::group(['prefix' => 'history', 'middleware' => 'auth:api'], function() {
 
     Route::get('all', 'HistoryController@show_all');
+
+    Route::get('{what}/v1', 'HistoryController@show_source');
 
 });
 
