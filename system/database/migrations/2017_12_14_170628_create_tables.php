@@ -25,7 +25,8 @@ class CreateTables extends Migration
             $table->string('api_token', 100)->unique();
             $table->string('password');
             $table->string('status');
-            $table->string('address_data');
+            $table->string('license')->nullable();
+            $table->string('address_data')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

@@ -33,7 +33,8 @@ class UserController extends Controller
             'api_token' => str_random(60),
             'password' => bcrypt($data['password']),
             'status' => 'member',
-            'address' => $data['address'],
+            'license' => $data['license'],
+            'address_data' => $data['address'],
         ]);
     }
 
@@ -102,9 +103,15 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function showUserAll()
-    {
+    { 
         $users = User::where('status','member')->get();
-        return response()->json(['users' => $users], 200);
+        $data = [];
+        foreach ($users as $u) {
+            $u->rfid = Rfid::where('rfid_user', $u->id)->get()[0]->rfid;
+            $u->rfid_data = Rfid::where('rfid_user', $u->id)->get()[0]->rfid_data;
+            $data[] = $u;
+        }
+        return response()->json(['users' => $data], 200);
     }
 
     /**
@@ -116,15 +123,18 @@ class UserController extends Controller
      */
     public function updateUser(Request $request, $id)
     {
-
         $user = User::find($id);
         if(!$user){
             return response()->json(['error' => 'No member to update'], 404);
         }
+        $rfid = Rfid::where('rfid_user', $id)->get();
+        if ($rfid[0]->rfid != $request->input('rfid')){
+            Rfid::where('rfid_user', $id)->update(['rfid_user' => null]);
+            Rfid::where('rfid', $rfid[0]->rfid)->update(['rfid_user' => $id]);
+        }
         $user->name = $request->input('name');
-        $user->username = $request->input('username');
-        $user->email = $request->input('email');
-        $user->address = $request->input('address');
+        $user->license = $request->input('license');
+        $user->address_data = $request->input('address');
         $user->save();
         return response()->json(['user' => $user], 200);
     }

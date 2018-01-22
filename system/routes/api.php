@@ -21,11 +21,11 @@ Route::post('auth/admin/login', 'Admin\LoginController@login');
 /**
  * User API
  */
-Route::group(['prefix' => 'user'/*, 'middleware' => 'auth:api'*/], function () {
+Route::group(['prefix' => 'user', 'middleware' => 'auth:api'], function () {
     Route::get('all', 'UserController@showUserAll');
     Route::get('id/{id}', 'UserController@showUser');
     Route::get('edit/{id}', 'UserController@editUser');
-    Route::patch('update/{id}', 'UserController@updateUser');
+    Route::post('update/{id}', 'UserController@updateUser');
     Route::post('add', 'UserController@storeUser');
     Route::delete('delete/{id}', 'UserController@destroyUser');
 });
@@ -33,7 +33,7 @@ Route::group(['prefix' => 'user'/*, 'middleware' => 'auth:api'*/], function () {
 /**
  * Location API
  */
-Route::group(['prefix' => 'locate'/*, 'middleware' => 'auth:api'*/], function () {
+Route::group(['prefix' => 'locate', 'middleware' => 'auth:api'], function () {
     Route::get('all', 'LocationController@showLocationAll');
     Route::get('id/{id}', 'LocationController@showLocation');
     Route::get('edit/{id}', 'LocationController@editLocation');
@@ -47,7 +47,7 @@ Route::group(['prefix' => 'locate'/*, 'middleware' => 'auth:api'*/], function ()
 /**
  * Device API
  */
-Route::group(['prefix' => 'device'/*, 'middleware' => 'auth:api'*/], function () {
+Route::group(['prefix' => 'device', 'middleware' => 'auth:api'], function () {
     Route::get('all', 'DeviceController@showDeviceAll');
     Route::get('id/{id}', 'DeviceController@showDevice');
     Route::get('name/{name}', 'DeviceController@showDeviceId');
@@ -69,7 +69,7 @@ Route::group(['prefix' => 'device'/*, 'middleware' => 'auth:api'*/], function ()
 /**
  * Rfid API
  */
-Route::group(['prefix' => 'rfid'/*, 'middleware' => 'auth:api'*/], function () {
+Route::group(['prefix' => 'rfid', 'middleware' => 'auth:api'], function () {
 
     Route::group(['prefix' => 'no'], function () {
         Route::get('user', 'RfidController@showRfidNoUser');
@@ -81,8 +81,10 @@ Route::group(['prefix' => 'rfid'/*, 'middleware' => 'auth:api'*/], function () {
         Route::get('device', 'RfidController@showRfidAdDevice');
     });
 
+    Route::get('fire/data', 'RfidController@getData');
+
     Route::get('all', 'RfidController@showRfidAll');
-    Route::post('data', 'RfidController@showRfidData');
+    Route::post('data/{id}', 'RfidController@showRfidData');
     Route::patch('update/{id}', 'RfidController@updateRfid');
 
     Route::post('updatejson', 'RfidController@updateRfidJson');
@@ -98,9 +100,24 @@ Route::group(['prefix' => 'rfid'/*, 'middleware' => 'auth:api'*/], function () {
 /**
  * History API
  */
-Route::group(['prefix' => 'history'/*, 'middleware' => 'auth:api'*/], function() {
+Route::group(['prefix' => 'history', 'middleware' => 'auth:api'], function() {
 
     Route::get('all', 'HistoryController@show_all');
+    Route::post('id', 'HistoryController@show');
+
+    Route::get('fire/data', 'HistoryController@getData');
+    
+    Route::post('whereami', 'HistoryController@showWhereAmI');
+
+    Route::get('{what}/v1', 'HistoryController@show_source');
 
 });
 
+Route::get('history/fire', 'HistoryController@getData');
+Route::get('rfid/fire', 'RfidController@getData');
+
+Route::get('history/show', function () {
+
+    return view('show');
+
+});

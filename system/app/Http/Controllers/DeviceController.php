@@ -108,10 +108,11 @@ class DeviceController extends Controller
     public function updateDevice(Request $request, $id)
     {
         $Data = json_decode($request->getContent(), true);
-        $Device = Device::where('device_id', $id)->get()->toArray();
+        $Device = Device::where('device_id', $id)->get();
         if(count($Device) > 0){
             if(Device::where('device_id', $id)
                 ->update(['device_ultra' => $Data['device_ultra']])) {
+                event(new \App\Events\EventDevice($Device[0]->locate_id));
                 return 1;
             } else {
                 return 0;
@@ -171,6 +172,7 @@ class DeviceController extends Controller
             ['device_status', 'yes'],
             ['locate_id', $where]
         ])->get()->toArray();
+        event(new \App\Events\EventDevice($where));
         return response()->json($Device, 200);
     }
 
