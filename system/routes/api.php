@@ -111,6 +111,8 @@ Route::group(['prefix' => 'history', 'middleware' => 'auth:api'], function() {
 
     Route::get('{what}/v1', 'HistoryController@show_source');
 
+    Route::get('{what}/v1', 'HistoryController@show_source');
+
 });
 
 Route::get('history/fire', 'HistoryController@getData');

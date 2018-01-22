@@ -75,8 +75,9 @@ class HistoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show_all()
+    public function show_source($what)
     {
+<<<<<<< HEAD
         return response()->json(['history' => History::all()], 200);
     }
 
@@ -99,6 +100,8 @@ class HistoryController extends Controller
      */
     public function show_source($what)
     {
+=======
+>>>>>>> 2dc8ddfff62ba10a72b31402bdcf087427814eab
         $data = [];
 
 
@@ -121,7 +124,11 @@ class HistoryController extends Controller
         if ($what == "Weekly") {
             $name = ['จ', 'อ', 'พ', 'พฤ', 'ศ', 'ส', 'อา']; $j = 0;
             $startOfWeek = date("Y-m-d", strtotime("Monday this week"));
+<<<<<<< HEAD
             $day = date("d", strtotime($startOfWeek . " + 0 day"));
+=======
+            $day = date("d", strtotime($startOfWeek . " + 1 day"));
+>>>>>>> 2dc8ddfff62ba10a72b31402bdcf087427814eab
             for ($i=1; $i <= $day+7; $i++) {
                 if (($i >= $day) && (($i-$day)<7)) {
                     if ($i < 10)
